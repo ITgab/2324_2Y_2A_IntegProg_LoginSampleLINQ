@@ -259,6 +259,8 @@ namespace _2324_2Y_2A_IntegProg_LoginSampleLINQ
 		
 		private System.DateTime _TimeStamp;
 		
+		private string _Action;
+		
 		private EntityRef<LoginUser> _LoginUser;
 		
     #region Extensibility Method Definitions
@@ -271,6 +273,8 @@ namespace _2324_2Y_2A_IntegProg_LoginSampleLINQ
     partial void OnLoginIDChanged();
     partial void OnTimeStampChanging(System.DateTime value);
     partial void OnTimeStampChanged();
+    partial void OnActionChanging(string value);
+    partial void OnActionChanged();
     #endregion
 		
 		public Log()
@@ -339,6 +343,26 @@ namespace _2324_2Y_2A_IntegProg_LoginSampleLINQ
 					this._TimeStamp = value;
 					this.SendPropertyChanged("TimeStamp");
 					this.OnTimeStampChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Action", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Action
+		{
+			get
+			{
+				return this._Action;
+			}
+			set
+			{
+				if ((this._Action != value))
+				{
+					this.OnActionChanging(value);
+					this.SendPropertyChanging();
+					this._Action = value;
+					this.SendPropertyChanged("Action");
+					this.OnActionChanged();
 				}
 			}
 		}

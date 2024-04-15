@@ -24,6 +24,8 @@ namespace _2324_2Y_2A_IntegProg_LoginSampleLINQ
         string userName = "";
         bool loginFlag = false;
 
+        string _username = "";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -42,7 +44,7 @@ namespace _2324_2Y_2A_IntegProg_LoginSampleLINQ
                 //MessageBox.Show($"username is {txtbUserName.Text} password is {txtbPassword.Text}");
                 var loginQuery = from s in _lsDC.LoginUsers 
                                  where 
-                                    s.LoginID == txtbUserName.Text
+                                    s.Name == txtbUserName.Text
                                  //&& s.Password == txtbPassword.Text
                                  select s;
 
@@ -59,6 +61,7 @@ namespace _2324_2Y_2A_IntegProg_LoginSampleLINQ
                             Log log = new Log();
                             log.LoginID = login.LoginID;
                             log.TimeStamp = cDT;
+                            log.Action = "Login";
 
                             _lsDC.Logs.InsertOnSubmit(log);
                             _lsDC.SubmitChanges();
@@ -69,8 +72,9 @@ namespace _2324_2Y_2A_IntegProg_LoginSampleLINQ
 
                 if(loginFlag)
                 {
+                    _username = txtbUserName.Text;
                     MessageBox.Show($"Login success! Welcome back {userName}!");
-                    Window1 w1 = new Window1();
+                    Window1 w1 = new Window1(_username);
                     w1.Show();
                     this.Close();
                 }
